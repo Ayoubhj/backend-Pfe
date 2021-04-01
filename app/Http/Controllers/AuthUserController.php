@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\Http\Requests\RegisterRequest;
 use App\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -40,14 +41,7 @@ class AuthUserController extends Controller
         }
     }
 
-    public function register(Request $request){
-
-        $request->validate([
-            'name' => 'required','min:3',
-            'email' => 'required','email',
-            'password' => 'required','min:8',
-            'confirm_password' => 'required','email','same:password',
-        ]);
+    public function register(RegisterRequest $request){
 
         User::create([
             'name' => $request->input('name'),

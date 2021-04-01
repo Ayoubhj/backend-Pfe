@@ -24,6 +24,7 @@ Route::prefix('user')->group(function(){
     Route::middleware('auth:user')->group(function (){
         Route::get('user',[\App\Http\Controllers\AuthUserController::class,'user']);
         Route::apiResource('category','\App\Http\Controllers\CategoryController');
+        Route::apiResource('product','\App\Http\Controllers\ProductController');
     });
 
 });
