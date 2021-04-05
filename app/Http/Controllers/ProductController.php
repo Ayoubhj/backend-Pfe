@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -75,18 +76,21 @@ class ProductController extends Controller
                  $product->cat_id =$request->input('cat_id');
                  $product->title= $request->input('title');
                  $product->descreption = $request->input('descreption');
-
+                 $product->image = $request->image->store('images');
                  $product->quantity = $request->input('quantity');
                  $product->price = $request->input('price');
 
                  if ($product){
-                     $product->update();
+                     $product->save();
                      return new ProductResource($product);
                  }
+                return response()->json([
+                 "error" => 403
+                ]);
     }
 
 
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         $product = Product::findorfail($id);
         $productImage = $product->image;
@@ -94,6 +98,5 @@ class ProductController extends Controller
             Storage::delete($productImage);
             $product->destroy($id);
         }
-
     }
 }
