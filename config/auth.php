@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'admins',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'admins',
         ],
 
         'user' => [
@@ -46,11 +46,7 @@ return [
             'provider' => 'users',
             //hash' => false,
         ],
-        'admin' => [
-            'driver' => 'sanctum',
-            'provider' => 'admins',
-            //'hash' => false,
-        ],
+
     ],
 
     /*
@@ -102,8 +98,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'admins' => [
+            'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

@@ -28,12 +28,4 @@ Route::prefix('user')->group(function(){
     });
 
 });
-Route::prefix('admin')->group(function(){
-    // s and login
-    Route::post('login',[\App\Http\Controllers\AuthAdminController::class,'login']);
 
-    //
-    Route::middleware('auth:admin')->group(function (){
-    });
-
-});
