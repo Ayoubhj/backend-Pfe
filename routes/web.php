@@ -25,3 +25,4 @@ Auth::routes([
 ]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('category','CategoryAdminPanel');
+Route::resource('product','ProductController');

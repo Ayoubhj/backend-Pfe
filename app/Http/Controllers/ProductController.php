@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
@@ -12,13 +13,9 @@ class ProductController extends Controller
 
     public function index()
     {
-        $product = Product::all();
-        if ($product){
-            return new ProductResource($product);
-        }
-        return response()->json([
-            'error' => 'there is no Product '
-        ]);
+        $products = Product::all();
+        $categories = Category::all();
+        return view('product.index',compact('products','categories'));
     }
 
 
@@ -30,29 +27,18 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'cat_id' => 'required',
-            'title' => 'required',
-            'descreption' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-          $product = Product::create([
-               'cat_id' => $request->input('cat_id'),
-               'title' => $request->input('title'),
-               'descreption' => $request->input('descreption'),
-                'image' => $request->image->store('images'),
-                'quantity' => $request->input('quantity'),
-                'price' => $request->input('price'),
-          ]);
+          $product = new Product();
+              $product->cat_id = $request->input('cat_id');
+              $product->title = $request->input('title');
+              $product-> descreption = $request->input('descreption');
+              $product->image = $request->image->store('images');
+              $product->quantity = $request->input('quantity');
+              $product->price = $request->input('price');
+          $product->save();
 
-          if ($product){
-              return new ProductResource($product);
-          }
-          return  response()->json([
-               "error" => 403
-          ]);
+          $request->session()->flash('status',"product has added");
+
+          return redirect('product');
     }
 
 
@@ -76,27 +62,30 @@ class ProductController extends Controller
                  $product->cat_id =$request->input('cat_id');
                  $product->title= $request->input('title');
                  $product->descreption = $request->input('descreption');
-                 $product->image = $request->image->store('images');
                  $product->quantity = $request->input('quantity');
                  $product->price = $request->input('price');
 
-                 if ($product){
                      $product->save();
-                     return new ProductResource($product);
-                 }
-                return response()->json([
-                 "error" => 403
-                ]);
+
+
+        $request->session()->flash('status',"product has added");
+
+        return redirect('product');
     }
 
 
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
         $product = Product::findorfail($id);
         $productImage = $product->image;
-        if ($productImage) {
+        if (!$productImage) {
+             return  response()->json(['error' => 403]);
+        }
             Storage::delete($productImage);
             $product->destroy($id);
+            $request->session()->flash('status',"product has added");
+
+            return redirect('product');
         }
-    }
+
 }

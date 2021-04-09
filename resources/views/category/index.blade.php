@@ -54,13 +54,13 @@
                               <td>{{$category->name}}</td>
                               <td class="d-flex justify-content-around">
                                   <a type="button"  class="btn btn-primary " data-toggle="modal" data-target="#exampleModalCenter">
-                                      edit
+                                      <i class="fa fa-edit"></i>
                                   </a>
                                   <form method="POST" action="{{route('category.destroy',$category->id)}}">
                                       @csrf
                                       @method('DELETE')
                                   <button type="submit" class="btn btn-danger" >
-                                      Delete
+                                      <i class="fa fa-trash"></i>
                                   </button>
                                   </form>
 
@@ -102,7 +102,6 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript"  charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
   <script>
 
       $(document).ready(function() {

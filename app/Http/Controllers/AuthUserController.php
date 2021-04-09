@@ -22,7 +22,7 @@ class AuthUserController extends Controller
                 'password' => 'required'
             ]);
 
-            $user = User::where('email', $request->email)->first();
+            $user = User::Where('email', $request->email)->first();
             if (!Hash::check($request->password, $user->password, [])) {
                 throw new \Exception('Error in Login');
             }
