@@ -23,8 +23,10 @@ Route::prefix('user')->group(function(){
     //
     Route::middleware('auth:user')->group(function (){
         Route::get('user',[\App\Http\Controllers\AuthUserController::class,'user']);
+        Route::post('placeorder',[\App\Http\Controllers\OrederController::class,'placeorder']);
 
     });
-
+    Route::get('lastshoes',[\App\Http\Controllers\FrontendController::class,'getlastproduct']);
+    Route::get('getproduct/{id}',[\App\Http\Controllers\FrontendController::class,'getproduct']);
 });
 

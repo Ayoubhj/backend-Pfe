@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 
 
+use App\Http\Requests\LoginReq;
+use App\Http\Requests\RegisterReq;
 use App\Http\Requests\RegisterRequest;
 use App\User;
 use Exception;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,38 +19,31 @@ class AuthUserController extends Controller
 
     public function login(Request $request)
     {
-        try {
-            $request->validate([
-                'email' => 'email|required',
-                'password' => 'required'
-            ]);
+       $user = User::where('email',$request->email)->first();
 
-            $user = User::Where('email', $request->email)->first();
-            if (!Hash::check($request->password, $user->password, [])) {
-                throw new \Exception('Error in Login');
-            }
-            $tokenResult = $user->createToken('authToken')->plainTextToken;
-            return response()->json([
-                'status_code' => 200,
-                'access_token' => $tokenResult,
-                'token_type' => 'Bearer',
-            ]);
-        } catch (\Exception $error) {
-            return response()->json([
-                'status_code' => 500,
-                'message' => 'Error in Login',
-                'error' => $error,
-            ]);
-        }
+       if(!$user || !Hash::check($request->password,$user->password)){
+           return response([
+              'message' => ['password or email is invalid']
+           ],404);
+       }
+
+       $token = $user->createToken('Auth-login')->plainTextToken;
+
+       return response()->json([
+           'token' =>$token
+       ]);
     }
 
-    public function register(RegisterRequest $request){
+    public function register(RegisterReq $request)
+    {
 
-        User::create([
+          User::create([
             'name' => $request->input('name'),
-            'email' =>$request->input('email'),
+            'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
         ]);
+
+
         return response()->json([
             'success' => 200,
         ]);
@@ -55,4 +51,6 @@ class AuthUserController extends Controller
     public function user(){
         return auth()->user();
     }
+
+
 }
