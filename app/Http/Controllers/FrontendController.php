@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,5 +21,20 @@ class FrontendController extends Controller
 
         return response()->json($product);
 
+    }
+
+    public function getcategories(){
+
+        $cat = Category::all();
+
+        return response()->json($cat);
+
+    }
+
+    public function getproductBycategory($id){
+
+        $product  = Product::where('id','=',$id);
+
+        return response()->json($product);
     }
 }

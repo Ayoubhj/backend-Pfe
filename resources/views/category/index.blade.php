@@ -53,7 +53,7 @@
                               <td>{{$category->id}}</td>
                               <td>{{$category->name}}</td>
                               <td class="d-flex justify-content-around">
-                                  <a type="button"  class="btn btn-primary " data-toggle="modal" data-target="#exampleModalCenter">
+                                  <a type="button"  class="btn btn-primary "    data-toggle="modal" data-target="#exampleModalCenter{{$category->id}}">
                                       <i class="fa fa-edit"></i>
                                   </a>
                                   <form method="POST" action="{{route('category.destroy',$category->id)}}">
@@ -65,7 +65,7 @@
                                   </form>
 
                               </td>
-                              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal fade" id="exampleModalCenter{{$category->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                       <div class="modal-content">
                                           <div class="modal-header">

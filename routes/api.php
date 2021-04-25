@@ -27,6 +27,8 @@ Route::prefix('user')->group(function(){
 
     });
     Route::get('lastshoes',[\App\Http\Controllers\FrontendController::class,'getlastproduct']);
+    Route::get('category',[\App\Http\Controllers\FrontendController::class,'getcategories']);
+    Route::get('productbycategory',[\App\Http\Controllers\FrontendController::class,'getproductBycategory']);
     Route::get('getproduct/{id}',[\App\Http\Controllers\FrontendController::class,'getproduct']);
 });
 
