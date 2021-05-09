@@ -108,7 +108,7 @@
                                                     <option  value="{{$category->id}}" >{{$category->name}}</option>
                                                 @endforeach
                                             </select>
-                                            <label>Title</label> <input class="form-control" type="text " placeholder="enter title" name="title"/>
+                                            <label>Title</label> <input class="form-control" type="text " placeholder="enter title" value="{{$product->name}}" name="title"/>
                                             <label>descreption</label> <textarea  class="form-control mb-3"  placeholder="descreption" name="descreption"></textarea>
                                             <div class="custom-file ">
 

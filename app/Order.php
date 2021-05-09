@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $table ="Order";
+    protected $fillable = ["user_id","firstname","lastname","adresse","city","codepostal","telephone","product_id","size","quantity","status"];
 
-    protected $fillable = ["user_id","firstname","lastname","Adresse","City","Codepostal","Telphone"];
+    public function products(){
+        return $this->belongsTo(Product::class,'product_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

@@ -79,7 +79,7 @@
             <div id="wrapper">
 
                 <!-- Sidebar -->
-                <div id="sidebar-wrapper">
+                <div id="sidebar-wrapper" class="position-fixed">
                     <ul class="sidebar-nav">
                         <li class="sidebar-brand">
                             <a href="#">
@@ -96,7 +96,7 @@
                             <a href="{{route('product.index')}}">Products</a>
                         </li>
                         <li>
-                            <a href="#">Orders</a>
+                            <a  href="{{route('order.index')}}">Orders</a>
                         </li>
 
                     </ul>

@@ -24,11 +24,22 @@ Route::prefix('user')->group(function(){
     Route::middleware('auth:user')->group(function (){
         Route::get('user',[\App\Http\Controllers\AuthUserController::class,'user']);
         Route::post('placeorder',[\App\Http\Controllers\OrederController::class,'placeorder']);
+        Route::get('getorders/{id}',[\App\Http\Controllers\FrontendController::class,'getorders']);
 
     });
+    // get last 4 shoes
     Route::get('lastshoes',[\App\Http\Controllers\FrontendController::class,'getlastproduct']);
+    // get categories
     Route::get('category',[\App\Http\Controllers\FrontendController::class,'getcategories']);
-    Route::get('productbycategory',[\App\Http\Controllers\FrontendController::class,'getproductBycategory']);
+
+
+    //get all product
+    Route::get('getallproducts',[\App\Http\Controllers\FrontendController::class,'getallproducts']);
+    // get last 4 clothes
+    Route::get('getlastclothes',[\App\Http\Controllers\FrontendController::class,'getlastclothes']);
+    // details product
     Route::get('getproduct/{id}',[\App\Http\Controllers\FrontendController::class,'getproduct']);
+    //get by category
+    Route::get('getproductbycat/{id}',[\App\Http\Controllers\FrontendController::class,'getproductbycat']);
 });
 
