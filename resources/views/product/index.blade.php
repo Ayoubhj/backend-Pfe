@@ -103,20 +103,20 @@
                                         @method('PUT')
                                         <div class="modal-body">
                                             <select class="custom-select mr-sm-2 m-1" name="cat_id" id="inlineFormCustomSelect">
-                                                <option selected>Choose...</option>
+                                                <option  value="{{$product->cat_id}}" selected>{{$product->categories->name}}</option>
                                                 @foreach($categories as $category)
                                                     <option  value="{{$category->id}}" >{{$category->name}}</option>
                                                 @endforeach
                                             </select>
-                                            <label>Title</label> <input class="form-control" type="text " placeholder="enter title" value="{{$product->name}}" name="title"/>
-                                            <label>descreption</label> <textarea  class="form-control mb-3"  placeholder="descreption" name="descreption"></textarea>
+                                            <label>Title</label> <input class="form-control" type="text "  placeholder="enter title" value="{{$product->title}}" name="title"/>
+                                            <label>descreption</label> <textarea  class="form-control mb-3"  placeholder="descreption"  name="descreption">{{$product->descreption}}</textarea>
                                             <div class="custom-file ">
 
-                                                <input name="image" type="file" class="custom-file-input" id="customFile">
+                                                <input value="{{$product->image}}" name="image" type="file" class="custom-file-input" id="customFile">
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
-                                            <label>quantity</label> <input class="form-control" type="text " placeholder="quantity" name="quantity"/>
-                                            <label>price</label> <input class="form-control" type="text " placeholder="price" name="price"/>
+                                            <label>quantity</label> <input class="form-control" type="text " value="{{$product->quantity}}" placeholder="quantity" name="quantity"/>
+                                            <label>price</label> <input class="form-control" type="text "  value="{{$product->price}}"  placeholder="price" name="price"/>
 
                                         </div>
                                         <div class="modal-footer">

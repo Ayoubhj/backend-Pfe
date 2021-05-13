@@ -69,21 +69,13 @@ class ProductController extends Controller
 
     public function update(Request $request,  $id)
     {
+        dd($request);
         $product = Product::findOrfail($id);
 
                  $product->cat_id =$request->input('cat_id');
                  $product->title= $request->input('title');
                  $product->descreption = $request->input('descreption');
-                 if ($request->hasFile('image')) {
-                 $image = $request->file('image');
-
-                 $fileName = $image->getClientOriginalName();
-                 $destinationPath = base_path() . '/public/images/' ;
-                 $image->move($destinationPath, $fileName);
-
-                 $attributes['image'] = $fileName;
-                 }
-                 $product->image = $fileName;
+                 $product->image = $request->input('image');
                  $product->quantity = $request->input('quantity');
                  $product->price = $request->input('price');
 

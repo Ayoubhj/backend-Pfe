@@ -9,7 +9,7 @@ class Product extends Model
     protected $fillable = ['cat_id','title','descreption','image','quantity','price'];
 
     public function categories(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class,'cat_id');
     }
     public function orders(){
         return $this->hasMany(Order::class);

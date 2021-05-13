@@ -15,7 +15,7 @@ class OrederController extends Controller
 {
     public function placeorder(Request $request)
     {
-      try{
+    
 
            $order =  Order::create([
                 "user_id" => $request->input('user_id'),
@@ -31,16 +31,12 @@ class OrederController extends Controller
             ]);
     
             DB::table('products')->where('id','=',$order->product_id)->decrement('quantity', $order->quantity); 
-
-            }catch (\Exception $error) {
-                return response()->json([
-                    'status_code' => 500,
-                    'message' => 'Fill fields',
-                    'error' => $error,
-                ]);
+            if($order){
+                return response()->json(['messege' => ["fill the fields please"],404]); 
             }
+           
         
-            return response()->json(['Order is register']);   
+            return response()->json(['Order is register'],200);   
        
     }
 }
